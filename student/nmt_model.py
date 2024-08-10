@@ -89,11 +89,11 @@ class NMT(nn.Module):
         self.post_embed_cnn = nn.Conv1d(embed_size,embed_size,kernel_size=2,padding=1)
         self.encoder = nn.LSTM(embed_size,hidden_size,bias=True,bidirectional=True)
         self.decoder = nn.LSTMCell(embed_size+hidden_size,hidden_size,bias=True)
-        self.h_projection = nn.Linear(2*hidden_size,hidden_size)
-        self.c_projection =nn.Linear(2*hidden_size,hidden_size)
-        self.att_projection = nn.Linear(2*hidden_size,hidden_size)
-        self.combined_output_projection = nn.Linear(3*hidden_size,hidden_size)
-        self.target_vocab_projection = nn.Linear(hidden_size,len(self.vocab.tgt))
+        self.h_projection = nn.Linear(2*hidden_size,hidden_size,bias=False)
+        self.c_projection =nn.Linear(2*hidden_size,hidden_size,bias=False)
+        self.att_projection = nn.Linear(2*hidden_size,hidden_size,bias=False)
+        self.combined_output_projection = nn.Linear(3*hidden_size,hidden_size,bias=False)
+        self.target_vocab_projection = nn.Linear(hidden_size,len(self.vocab.tgt),bias=False)
         self.dropout = nn.Dropout(self.dropout_rate)
 
 
